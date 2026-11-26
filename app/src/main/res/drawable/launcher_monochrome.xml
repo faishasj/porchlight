@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed-icon (Android 13+) layer: the phone with its cover screen cut out, cameras and house filled. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#FFFFFFFF" android:fillType="evenOdd" android:pathData="M44,29H64A9,9 0,0 1,73 38V70A9,9 0,0 1,64 79H44A9,9 0,0 1,35 70V38A9,9 0,0 1,44 29ZM44.5,32.5H63.5A6,6 0,0 1,69.5 38.5V57.5A6,6 0,0 1,63.5 63.5H44.5A6,6 0,0 1,38.5 57.5V38.5A6,6 0,0 1,44.5 32.5Z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M58.3,59.5a1.7,1.7 0,1 0,3.4 0a1.7,1.7 0,1 0,-3.4 0ZM62.8,59.5a1.7,1.7 0,1 0,3.4 0a1.7,1.7 0,1 0,-3.4 0Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M47,46l7,-6 7,6M48.8,44.7V51.5h10.4V44.7" />
+</vector>

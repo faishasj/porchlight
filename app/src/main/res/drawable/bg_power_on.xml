@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Power button on the light control screen while the light is on. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="#26000000">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/app_amber" />
+        </shape>
+    </item>
+</ripple>

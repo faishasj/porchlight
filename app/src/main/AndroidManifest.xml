@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- HaClient checks for Wi-Fi, Ethernet or a VPN before using a plain http URL. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--
+        Lets the main screen's Fix button show the system "let app always run in the background?"
+        dialog, which sets Battery to Unrestricted. Without it, the widget can't refresh in the
+        background on many phones. Google Play only allows this for some app types, so remove it
+        (the button falls back to App info) if the app is ever published there.
+    -->
+    <uses-permission
+        android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
+        tools:ignore="BatteryLife" />
+
+    <!--
+        usesCleartextTraffic: most local HA installs are plain http://192.168.x.x:8123.
+        Network security config can't whitelist an IP range, so the platform allows it app-wide
+        and data/UrlPolicy.kt limits http:// to private-network hosts (checked in Settings and
+        before every request), used only on Wi-Fi, Ethernet or a VPN. If your URLs are all https,
+        you can set this to false.
+
+        allowBackup="false" stops cloud backup; on Android 12+ device-to-device transfer needs
+        dataExtractionRules too. Nothing is copied: the token's Keystore key can't move anyway.
+    -->
+    <application
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Porchlight"
+        android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Settings page (Theme), opened from the gear on the main screen. -->
+        <activity
+            android:name=".AppSettingsActivity"
+            android:exported="false" />
+
+        <!--
+            A light's controls (power, sliders, colour wheel, presets, modes), opened by tapping
+            the light's name on the widget.
+            Its own task, noHistory and excludeFromRecents, so Done, back or leaving it always
+            lands back on the widget. Not showWhenLocked: opened from a locked screen, Android
+            asks for an unlock first.
+        -->
+        <activity
+            android:name=".control.LightControlActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@style/Theme.Porchlight.LightControl" />
+
+        <receiver
+            android:name=".widget.HaWidgetReceiver"
+            android:exported="false"
+            android:label="@string/widget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <!-- Standard widget definition -->
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ha_widget_info" />
+
+            <!-- Samsung: show this widget on the Flex Window / cover screen -->
+            <meta-data
+                android:name="com.samsung.android.appwidget.provider"
+                android:resource="@xml/samsung_ha_widget_info" />
+        </receiver>
+    </application>
+</manifest>

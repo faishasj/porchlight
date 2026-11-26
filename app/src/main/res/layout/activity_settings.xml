@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Main screen: the Home Assistant connection. The gear opens AppSettingsActivity. -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:importantForAccessibility="no"
+                android:src="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:accessibilityHeading="true"
+                    android:text="@string/app_name"
+                    android:textColor="@color/app_text"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/open_settings"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="-12dp"
+                android:background="@drawable/bg_icon_button"
+                android:contentDescription="Settings"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_settings"
+                android:tint="@color/app_sub" />
+        </LinearLayout>
+
+        <!--
+            Shown while the Battery setting isn't Unrestricted, or Data Saver blocks the app, since
+            either stops the widget updating in the background (SettingsActivity.showBackgroundBanner).
+        -->
+        <LinearLayout
+            android:id="@+id/background_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_banner_warn"
+            android:orientation="vertical"
+            android:padding="14dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/background_banner_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:accessibilityLiveRegion="polite"
+                android:drawableStart="@drawable/ic_warning"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/app_warn"
+                android:textColor="@color/app_warn"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/background_fix"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_button_primary"
+                android:minHeight="0dp"
+                android:stateListAnimator="@null"
+                android:textAllCaps="false"
+                android:textColor="@color/app_on_amber"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Porchlight.GroupLabel"
+            android:accessibilityHeading="true"
+            android:text="Home Assistant" />
+
+        <LinearLayout style="@style/Porchlight.Card">
+
+            <TextView
+                style="@style/Porchlight.FieldLabel"
+                android:labelFor="@id/local_url"
+                android:text="Local URL" />
+
+            <EditText
+                android:id="@+id/local_url"
+                style="@style/Porchlight.Field"
+                android:hint="http://192.168.1.10:8123"
+                android:inputType="textUri" />
+
+            <TextView
+                android:id="@+id/http_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_banner_warn"
+                android:drawableStart="@drawable/ic_warning"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/app_warn"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp"
+                android:text="http:// sends your token unencrypted. Porchlight only uses it on Wi-Fi, Ethernet or a VPN, but anyone on that network can read it. Use https:// where you can."
+                android:textColor="@color/app_warn"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+            <TextView
+                style="@style/Porchlight.FieldLabel"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/remote_url"
+                android:text="Remote URL · optional" />
+
+            <EditText
+                android:id="@+id/remote_url"
+                style="@style/Porchlight.Field"
+                android:hint="https://xxxx.ui.nabu.casa"
+                android:inputType="textUri" />
+
+            <TextView
+                style="@style/Porchlight.Help"
+                android:text="Used when the local URL can't be reached." />
+
+            <TextView
+                style="@style/Porchlight.FieldLabel"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/token"
+                android:text="Access token" />
+
+            <EditText
+                android:id="@+id/token"
+                style="@style/Porchlight.Field"
+                android:hint="Paste your token"
+                android:inputType="textPassword" />
+
+            <TextView
+                style="@style/Porchlight.Help"
+                android:text="Create a long-lived token in Home Assistant under Profile → Security. Changing a URL needs the token again." />
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/bg_button_primary"
+                android:minHeight="0dp"
+                android:stateListAnimator="@null"
+                android:text="Test and save"
+                android:textAllCaps="false"
+                android:textColor="@color/app_on_amber"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!-- Testing…, or the result as a green or red banner (SettingsActivity.showStatus). -->
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:accessibilityLiveRegion="polite"
+                android:drawablePadding="8dp"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Settings page, opened from the gear on the main screen. -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/back"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_icon_button_filled"
+                android:contentDescription="Back"
+                android:padding="11dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_back"
+                android:tint="@color/app_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:accessibilityHeading="true"
+                android:text="Settings"
+                android:textColor="@color/app_text"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Porchlight.GroupLabel"
+            android:accessibilityHeading="true"
+            android:text="Appearance" />
+
+        <LinearLayout style="@style/Porchlight.Card">
+
+            <TextView
+                style="@style/Porchlight.FieldLabel"
+                android:text="Theme" />
+
+            <RadioGroup
+                android:id="@+id/theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_segment"
+                android:contentDescription="Theme"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <RadioButton
+                    android:id="@+id/theme_system"
+                    style="@style/Porchlight.Segment"
+                    android:text="System" />
+
+                <RadioButton
+                    android:id="@+id/theme_light"
+                    style="@style/Porchlight.Segment"
+                    android:layout_marginStart="3dp"
+                    android:text="Light" />
+
+                <RadioButton
+                    android:id="@+id/theme_dark"
+                    style="@style/Porchlight.Segment"
+                    android:layout_marginStart="3dp"
+                    android:text="Dark" />
+            </RadioGroup>
+
+            <TextView
+                style="@style/Porchlight.Help"
+                android:layout_marginTop="8dp"
+                android:text="For the widget, the light controls and the app. System follows your phone's dark mode." />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/app_sub"
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>

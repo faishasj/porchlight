@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Porchlight</string>
+    <string name="widget_label">Porchlight</string>
+    <string name="widget_description">Lights, scenes, vacuum and TV from Home Assistant, on the cover screen</string>
+    <!-- Chronometer format; %s is the elapsed time. -->
+    <string name="updated_format" formatted="false">Updated %s ago</string>
+</resources>

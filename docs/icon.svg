@@ -1,0 +1,12 @@
+<!-- Porchlight launcher icon, drawn from app/src/main/res/drawable/launcher_*.xml. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 18 72 72" width="128" height="128">
+  <defs><clipPath id="porchlight-mask"><rect x="18" y="18" width="72" height="72" rx="18"/></clipPath></defs>
+  <g clip-path="url(#porchlight-mask)">
+    <rect x="0" y="0" width="108" height="108" fill="#EEF0F4"/>
+    <path fill="#2C2C33" d="M44,29H64A9,9 0,0 1,73 38V70A9,9 0,0 1,64 79H44A9,9 0,0 1,35 70V38A9,9 0,0 1,44 29Z"/>
+    <path fill="#FFC94D" d="M44.5,32.5H63.5A6,6 0,0 1,69.5 38.5V57.5A6,6 0,0 1,63.5 63.5H44.5A6,6 0,0 1,38.5 57.5V38.5A6,6 0,0 1,44.5 32.5Z"/>
+    <path fill="#2C2C33" d="M58.3,59.5a1.7,1.7 0,1 0,3.4 0a1.7,1.7 0,1 0,-3.4 0ZM62.8,59.5a1.7,1.7 0,1 0,3.4 0a1.7,1.7 0,1 0,-3.4 0Z"/>
+    <path fill="none" stroke="#16161A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M47,46l7,-6 7,6M48.8,44.7V51.5h10.4V44.7"/>
+    <path fill="#55555C" d="M45.2,70H62.8A1.2,1.2 0,0 1,62.8 72.4H45.2A1.2,1.2 0,0 1,45.2 70Z"/>
+  </g>
+</svg>

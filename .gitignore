@@ -1,0 +1,15 @@
+.gradle/
+build/
+local.properties
+settings.json
+.idea/
+*.iml
+.DS_Store
+captures/
+.kotlin/
+*.apk
+*.jks
+*.keystore
+
+# Your own home config
+/home.yaml

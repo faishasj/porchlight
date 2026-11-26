@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        App screens (connection and Settings). Colours come from values/colors.xml and
+        values-night/colors.xml; the Theme setting picks between them (data/ThemeStore.kt).
+    -->
+    <style name="Theme.Porchlight" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/app_screen</item>
+        <item name="android:colorBackground">@color/app_screen</item>
+        <item name="android:statusBarColor">@color/app_screen</item>
+        <item name="android:navigationBarColor">@color/app_screen</item>
+        <item name="android:windowLightStatusBar">@bool/light_system_bars</item>
+        <item name="android:windowLightNavigationBar">@bool/light_system_bars</item>
+        <item name="android:colorAccent">@color/app_accent</item>
+        <item name="android:colorControlActivated">@color/app_accent</item>
+        <item name="android:textColorPrimary">@color/app_text</item>
+        <item name="android:textColorSecondary">@color/app_sub</item>
+        <item name="android:textColorHint">@color/app_sub</item>
+    </style>
+
+    <!-- "HOME ASSISTANT", "APPEARANCE": small caps above a card. -->
+    <style name="Porchlight.GroupLabel" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">22dp</item>
+        <item name="android:paddingHorizontal">4dp</item>
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/app_sub</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Porchlight.Card" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@drawable/bg_card</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="Porchlight.FieldLabel" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app_text</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textFontWeight">600</item>
+    </style>
+
+    <style name="Porchlight.Field" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:background">@drawable/bg_field</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:paddingVertical">12dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/app_text</item>
+        <item name="android:textColorHint">@color/app_sub</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="Porchlight.Help" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textColor">@color/app_sub</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Porchlight.Segment" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/bg_segment_option</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/segment_option_text</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textFontWeight">600</item>
+    </style>
+
+    <!-- Section labels on the light control screen, matching the widget's SectionLabel. -->
+    <style name="ControlLabel">
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/app_sub</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- A control's current value ("62%", "2700 K"), right-aligned beside its label. -->
+    <style name="ControlValue">
+        <item name="android:fontFeatureSettings">tnum</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:textColor">@color/app_text</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Light controls: same colours as the rest of the app, no action bar (the cover screen is too small for chrome). -->
+    <style name="Theme.Porchlight.LightControl" parent="Theme.Porchlight" />
+</resources>

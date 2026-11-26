@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- App screens (light; values-night/colors.xml has the dark ones). The widget has its own palette in widget/HaWidget.kt. -->
+<resources>
+    <color name="app_screen">#FFEEEEF2</color>
+    <color name="app_card">#FFFFFFFF</color>
+    <color name="app_text">#FF17171B</color>
+    <color name="app_sub">#FF64646D</color>
+    <color name="app_muted">#FF45454C</color>
+    <color name="app_field">#FFF5F5F8</color>
+    <color name="app_field_line">#FFD5D5DC</color>
+    <color name="app_accent">#FF8A5A00</color>
+    <color name="app_warn_bg">#FFFFF0CC</color>
+    <color name="app_warn">#FF7A4F00</color>
+    <color name="app_ok_bg">#FFDFF2E9</color>
+    <color name="app_ok">#FF1C6E4C</color>
+    <color name="app_error_bg">#FFFBE3E3</color>
+    <color name="app_error">#FF9E1F1F</color>
+    <color name="app_selected">#FF17171B</color>
+    <color name="app_on_selected">#FFFFFFFF</color>
+    <color name="app_ripple">#1F000000</color>
+    <color name="app_blue">#FF2F5BC4</color>
+    <!-- Left end of the brightness slider (the right end is amber). -->
+    <color name="app_track_start">#FFE2E2E8</color>
+    <!-- The primary button is amber with dark text in both themes. -->
+    <color name="app_amber">#FFFFC94D</color>
+    <color name="app_on_amber">#FF17171B</color>
+</resources>

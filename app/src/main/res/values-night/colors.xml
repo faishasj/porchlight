@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- App screens (dark). The widget has its own palette in widget/HaWidget.kt. -->
+<resources>
+    <color name="app_screen">#FF000000</color>
+    <color name="app_card">#FF1C1C1F</color>
+    <color name="app_text">#FFEDEDF0</color>
+    <color name="app_sub">#FF9A9AA2</color>
+    <color name="app_muted">#FFC9C9CE</color>
+    <color name="app_field">#FF111113</color>
+    <color name="app_field_line">#FF34343A</color>
+    <color name="app_accent">#FFFFC94D</color>
+    <color name="app_warn_bg">#FF2E2614</color>
+    <color name="app_warn">#FFFFC94D</color>
+    <color name="app_ok_bg">#FF13201B</color>
+    <color name="app_ok">#FF7FD6B0</color>
+    <color name="app_error_bg">#FF3A1616</color>
+    <color name="app_error">#FFFFB3B3</color>
+    <color name="app_selected">#FFEDEDF0</color>
+    <color name="app_on_selected">#FF111113</color>
+    <color name="app_ripple">#33FFFFFF</color>
+    <color name="app_blue">#FF8FB4FF</color>
+    <color name="app_track_start">#FF3A3A40</color>
+</resources>

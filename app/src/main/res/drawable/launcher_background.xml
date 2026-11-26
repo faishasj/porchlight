@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Launcher icon background in light mode: a pale cool grey behind the graphite phone.
+    drawable-night/ has the dark one. This follows the phone's dark mode, not the in-app Theme
+    setting: the launcher draws the icon, and some launchers only refresh it after a restart.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#FFEEF0F4" android:pathData="M0,0h108v108h-108z" />
+</vector>

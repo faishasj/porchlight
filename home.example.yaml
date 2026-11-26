@@ -1,0 +1,43 @@
+# Your home, for the Porchlight widget.
+#
+# Copy this file to home.yaml (git-ignored) and edit it. The build uses home.yaml if it
+# exists, otherwise this file. It checks the config as it builds, so a typo or an unknown
+# icon fails the build with a message instead of breaking the widget. Rebuild after editing.
+#
+# Lights and scenes aren't listed here: each room shows every light and scene in its
+# Home Assistant area, so adding a light to an area in HA adds it to the widget.
+#
+# Icons: any Material Design Icons name, the same set Home Assistant uses, such as
+# sofa-outline, bed-outline, door or paw. Browse them at https://pictogrammers.com/library/mdi/.
+# HA's spelling works too (icon: mdi:sofa-outline).
+
+# Required. One tile per room on the Lights screen, in this order.
+rooms:
+  - area: living_room # HA area ID (Settings → Areas, shown in the area's URL)
+    label: Living # Name on the tile
+    icon: sofa-outline # Optional, defaults to lightbulb-outline
+    clean_script: script.vacuum_living_room # Optional: script that vacuums just this room
+  - area: kitchen
+    label: Kitchen # No icon set: lightbulb-outline
+    clean_script: script.vacuum_kitchen
+  - area: bedroom
+    label: Bedroom
+    icon: bed-outline # No clean_script: this room has no tile on the Vacuum screen
+
+# Optional. Adds the Vacuum screen (start/pause, dock, and a tile per room with a clean_script).
+vacuum: vacuum.robot_vacuum
+
+# Optional. Adds the TV screen (play/pause).
+tv:
+  entity: media_player.living_room_tv
+  label: Living room TV # Optional, shown under Play/Pause
+
+# Optional. Adds "All off" to the House screen (needs two taps within 10 s).
+all_off_script: script.all_off
+
+# Optional. Read-only tiles on the House screen showing each sensor's state.
+sensors:
+  - entity: sensor.outdoor_temperature
+    label: Outside
+    icon: thermometer # Optional, defaults to eye-outline
+    unit: °C # Optional, shown after the state
