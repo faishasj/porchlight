@@ -20,59 +20,69 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:minHeight="44dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/power"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/bg_round"
-                android:contentDescription="Turn on"
-                android:padding="11dp"
-                android:src="@drawable/ic_power"
-                android:visibility="invisible" />
-
             <LinearLayout
+                android:id="@+id/back"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/app_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:textColor="@color/app_sub"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/done"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:layout_marginStart="8dp"
                 android:background="@drawable/bg_pill"
                 android:clickable="true"
+                android:contentDescription="Done"
                 android:focusable="true"
-                android:gravity="center"
-                android:paddingHorizontal="18dp"
-                android:text="Done"
-                android:textColor="@color/app_blue"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:minHeight="52dp"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="4dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_back"
+                    android:tint="@color/app_text" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/app_text"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:textColor="@color/app_sub"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/power"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_round"
+                android:contentDescription="Turn on"
+                android:padding="14dp"
+                android:src="@drawable/ic_power"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
@@ -128,7 +138,7 @@
                     <dev.faisha.porchlight.control.GradientSlider
                         android:id="@+id/brightness"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
+                        android:layout_height="52dp"
                         android:layout_marginTop="4dp"
                         android:contentDescription="Brightness" />
 
@@ -157,7 +167,7 @@
                     <dev.faisha.porchlight.control.GradientSlider
                         android:id="@+id/temp"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
+                        android:layout_height="52dp"
                         android:layout_marginTop="4dp"
                         android:contentDescription="Warm to cool white" />
                 </LinearLayout>

@@ -29,7 +29,7 @@ import org.json.JSONObject
 import kotlin.math.roundToInt
 
 /**
- * A light's controls, opened by tapping its name on the widget: power, a brightness slider,
+ * A light's controls, opened from the strip on a light's widget tile: power, a brightness slider,
  * a warm/cool slider, a colour wheel, colour presets and modes (the light's effect_list).
  * Widgets only get taps, so the sliders and wheel have to live here. Only the controls the
  * light supports are shown.
@@ -103,7 +103,7 @@ class LightControlActivity : Activity() {
         modes = findViewById(R.id.modes)
 
         title.text = intent.getStringExtra(EXTRA_NAME) ?: entityId
-        findViewById<View>(R.id.done).setOnClickListener { finish() }
+        findViewById<View>(R.id.back).setOnClickListener { finish() }
         power.setOnClickListener { togglePower() }
 
         brightness.colors = intArrayOf(getColor(R.color.app_track_start), AMBER)
@@ -301,21 +301,21 @@ class LightControlActivity : Activity() {
             }
             val cell = FrameLayout(this)
             cell.addView(dotView, FrameLayout.LayoutParams(dp(46), dp(46), Gravity.CENTER))
-            presets.addView(cell, LinearLayout.LayoutParams(0, dp(48), 1f))
+            presets.addView(cell, LinearLayout.LayoutParams(0, dp(52), 1f))
             presetViews += p to dotView
         }
     }
 
-    /** Effects as chips, three to a row like the widget used to show them. */
+    /** Effects as chips, two to a row so each is a wide target. */
     private fun buildModes(names: List<String>) {
         modes.removeAllViews()
         modeViews.clear()
         show(modesLabel, names.isNotEmpty())
         show(modes, names.isNotEmpty())
-        names.chunked(3).forEachIndexed { rowIndex, row ->
+        names.chunked(2).forEachIndexed { rowIndex, row ->
             val line = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
-            for (i in 0 until 3) {
-                val lp = LinearLayout.LayoutParams(0, dp(44), 1f).apply { if (i > 0) marginStart = dp(6) }
+            for (i in 0 until 2) {
+                val lp = LinearLayout.LayoutParams(0, dp(48), 1f).apply { if (i > 0) marginStart = dp(6) }
                 val name = row.getOrNull(i)
                 if (name == null) {
                     line.addView(View(this), lp)
@@ -326,9 +326,9 @@ class LightControlActivity : Activity() {
                     gravity = Gravity.CENTER
                     maxLines = 1
                     ellipsize = TextUtils.TruncateAt.END
-                    textSize = 12f
+                    textSize = 13f
                     setTypeface(typeface, android.graphics.Typeface.BOLD)
-                    setPadding(dp(4), 0, dp(4), 0)
+                    setPadding(dp(8), 0, dp(8), 0)
                     isClickable = true
                     setOnClickListener { pickMode(name) }
                 }
@@ -361,7 +361,7 @@ class LightControlActivity : Activity() {
 
     private fun styleChip(chip: TextView, selected: Boolean) {
         chip.background = GradientDrawable().apply {
-            cornerRadius = dp(14).toFloat()
+            cornerRadius = dp(16).toFloat()
             setColor(getColor(if (selected) R.color.app_selected else R.color.app_card))
         }
         chip.setTextColor(getColor(if (selected) R.color.app_on_selected else R.color.app_muted))
