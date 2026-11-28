@@ -160,7 +160,8 @@ offline.
 
 - Back (top left) goes up a level. Refresh (top right) fetches everything again.
 - The widget refreshes after every tap and every 15 minutes.
-- Tap a light's icon to toggle it, or its name to open its controls.
+- Tap a light to toggle it, or the sliders icon on its right to open its controls.
+- On every screen but Home, tap the title to go back.
 - To change the theme, tap the gear in the app and choose System, Light or Dark.
 
 ## 🔒 Security

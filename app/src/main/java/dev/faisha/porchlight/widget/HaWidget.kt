@@ -299,14 +299,14 @@ private fun ColumnScope.RoomScreen(ui: Ui, room: Room) {
     }
 
     LazyColumn(modifier = GlanceModifier.fillMaxWidth().defaultWeight()) {
-        chips.chunked(3).forEach { row ->
+        chips.chunked(2).forEach { row ->
             item {
                 ListRow {
                     row.forEachIndexed { i, chip ->
                         if (i > 0) Spacer(GlanceModifier.width(6.dp))
                         Box(GlanceModifier.defaultWeight()) { IconChip(chip) }
                     }
-                    repeat(3 - row.size) {
+                    repeat(2 - row.size) {
                         Spacer(GlanceModifier.width(6.dp))
                         Box(GlanceModifier.defaultWeight()) {}
                     }
@@ -475,35 +475,53 @@ private fun fixSettingAction(): Action = actionStartActivity<SettingsActivity>(
 @Composable
 private fun Header(ui: Ui, title: String, subtitle: String?, back: Action?) {
     Row(
-        modifier = GlanceModifier.fillMaxWidth().height(44.dp),
+        modifier = GlanceModifier.fillMaxWidth().height(52.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (back != null) {
-            IconButton(R.drawable.ic_back, "Back", C.text, back, bg = C.card)
+            Row(
+                modifier = GlanceModifier.defaultWeight().fillMaxHeight().background(C.card).cornerRadius(26.dp)
+                    .padding(start = 12.dp, end = 16.dp).clickable(back),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(R.drawable.ic_back, "Back", C.text, 22.dp)
+                Spacer(GlanceModifier.width(8.dp))
+                HeaderText(ui, title, subtitle, fixTappable = false)
+            }
             Spacer(GlanceModifier.width(8.dp))
         } else {
-            Spacer(GlanceModifier.width(6.dp))
-        }
-        Column(modifier = GlanceModifier.defaultWeight()) {
-            Text(title, maxLines = 1, style = textStyle(C.text, 16, bold = true))
-            when {
-                ui.error != null && ui.refreshing -> Text("Refreshing…", maxLines = 1, style = textStyle(C.sub, 12))
-                ui.error != null && ui.errorFixable -> Text(
-                    ui.error, maxLines = 1, style = textStyle(C.error, 12),
-                    modifier = GlanceModifier.clickable(fixSettingAction()),
-                )
-                ui.error != null -> Text(ui.error, maxLines = 1, style = textStyle(C.error, 12))
-                subtitle != null -> Text(subtitle, maxLines = 1, style = textStyle(C.sub, 12))
-                ui.updatedAt != null -> UpdatedTimer(ui.context, ui.updatedAt)
-            }
+            Spacer(GlanceModifier.width(12.dp))
+            HeaderText(ui, title, subtitle, fixTappable = true)
         }
         IconButton(
             R.drawable.ic_refresh, "Refresh",
             if (ui.refreshing) C.dim else C.blue,
             actionRunCallback<RefreshAction>(),
+            bg = C.card, size = 52.dp,
         )
     }
     Spacer(GlanceModifier.height(6.dp))
+}
+
+/**
+ * Title and subtitle. Inside the back button the error line can't have its own tap (it would sit
+ * inside another clickable), so only Home passes [fixTappable].
+ */
+@Composable
+private fun RowScope.HeaderText(ui: Ui, title: String, subtitle: String?, fixTappable: Boolean) {
+    Column(modifier = GlanceModifier.defaultWeight()) {
+        Text(title, maxLines = 1, style = textStyle(C.text, 16, bold = true))
+        when {
+            ui.error != null && ui.refreshing -> Text("Refreshing…", maxLines = 1, style = textStyle(C.sub, 12))
+            ui.error != null && ui.errorFixable && fixTappable -> Text(
+                ui.error, maxLines = 1, style = textStyle(C.error, 12),
+                modifier = GlanceModifier.clickable(fixSettingAction()),
+            )
+            ui.error != null -> Text(ui.error, maxLines = 1, style = textStyle(C.error, 12))
+            subtitle != null -> Text(subtitle, maxLines = 1, style = textStyle(C.sub, 12))
+            ui.updatedAt != null -> UpdatedTimer(ui.context, ui.updatedAt)
+        }
+    }
 }
 
 /**
@@ -584,26 +602,35 @@ private fun LightTile(ui: Ui, room: Room, light: Light) {
         else -> C.iconOffTint
     }
     val iconBg = if (light.isOn) Tone(light = glow, dark = C.iconOnDark) else C.iconOff
-    var iconBox = GlanceModifier.size(44.dp).background(iconBg).cornerRadius(22.dp)
-    if (light.isAvailable) iconBox = iconBox.clickable(callService("light", "toggle", entity(light.entityId), light.entityId))
 
     Row(
-        modifier = GlanceModifier.fillMaxWidth().height(64.dp)
-            .background(if (light.isOn) C.tileSome else C.lightOff).cornerRadius(18.dp)
-            .padding(start = 10.dp, end = 4.dp),
+        modifier = GlanceModifier.fillMaxWidth().height(72.dp)
+            .background(if (light.isOn) C.tileSome else C.lightOff).cornerRadius(18.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(modifier = iconBox, contentAlignment = Alignment.Center) {
-            Icon(mdi(light.icon, 24), "Toggle ${light.name}", iconTint, 24.dp)
+        // Most of the tile toggles the light; the strip on the right opens its controls.
+        var toggle = GlanceModifier.defaultWeight().fillMaxHeight().padding(start = 10.dp, end = 6.dp)
+        if (light.isAvailable) toggle = toggle.clickable(callService("light", "toggle", entity(light.entityId), light.entityId))
+        Row(modifier = toggle, verticalAlignment = Alignment.CenterVertically) {
+            // Drawn only, not a target of its own. Light theme needs the circle: it carries the light's colour.
+            Box(
+                modifier = GlanceModifier.size(30.dp).background(iconBg).cornerRadius(15.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(mdi(light.icon, 18), "Toggle ${light.name}", iconTint, 18.dp)
+            }
+            Spacer(GlanceModifier.width(8.dp))
+            Column(modifier = GlanceModifier.defaultWeight()) {
+                Text(light.name, maxLines = 2, style = textStyle(C.text, 13, bold = true))
+                Text(lightSummary(light, busy), maxLines = 1, style = textStyle(C.lightSub, 12))
+            }
         }
-        Spacer(GlanceModifier.width(8.dp))
-        Column(
-            modifier = GlanceModifier.defaultWeight().fillMaxHeight()
-                .clickable(openLightControls(light)),
-            verticalAlignment = Alignment.CenterVertically,
+        Box(modifier = GlanceModifier.width(1.dp).height(40.dp).background(C.dim.alpha(0.5f))) {}
+        Box(
+            modifier = GlanceModifier.width(44.dp).fillMaxHeight().clickable(openLightControls(light)),
+            contentAlignment = Alignment.Center,
         ) {
-            Text(light.name, maxLines = 2, style = textStyle(C.text, 13, bold = true))
-            Text(lightSummary(light, busy), maxLines = 1, style = textStyle(C.lightSub, 12))
+            Icon(mdi("tune", 20), "${light.name} controls", C.lightSub, 20.dp)
         }
     }
 }
@@ -613,14 +640,14 @@ private class ChipSpec(val label: String, val icon: Int, val fg: Tone, val actio
 @Composable
 private fun IconChip(chip: ChipSpec) {
     Row(
-        modifier = GlanceModifier.fillMaxWidth().height(44.dp).background(C.card).cornerRadius(22.dp)
-            .padding(horizontal = 10.dp).clickable(chip.action),
+        modifier = GlanceModifier.fillMaxWidth().height(48.dp).background(C.card).cornerRadius(24.dp)
+            .padding(horizontal = 12.dp).clickable(chip.action),
         verticalAlignment = Alignment.CenterVertically,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Icon(chip.icon, null, if (chip.busy) C.dim else chip.fg, 18.dp)
+        Icon(chip.icon, null, if (chip.busy) C.dim else chip.fg, 20.dp)
         Spacer(GlanceModifier.width(6.dp))
-        Text(if (chip.busy) "…" else chip.label, maxLines = 1, style = textStyle(if (chip.busy) C.dim else chip.fg, 13, bold = true))
+        Text(if (chip.busy) "…" else chip.label, maxLines = 1, style = textStyle(if (chip.busy) C.dim else chip.fg, 14, bold = true))
     }
 }
 
@@ -642,9 +669,9 @@ private fun ListRow(content: @Composable RowScope.() -> Unit) {
 }
 
 @Composable
-private fun IconButton(icon: Int, description: String, tint: Tone, action: Action, bg: Tone? = null) {
-    var modifier = GlanceModifier.size(44.dp)
-    if (bg != null) modifier = modifier.background(bg).cornerRadius(22.dp)
+private fun IconButton(icon: Int, description: String, tint: Tone, action: Action, bg: Tone? = null, size: Dp = 44.dp) {
+    var modifier = GlanceModifier.size(size)
+    if (bg != null) modifier = modifier.background(bg).cornerRadius(size / 2)
     Box(modifier = modifier.clickable(action), contentAlignment = Alignment.Center) {
         Icon(icon, description, tint, 22.dp)
     }
